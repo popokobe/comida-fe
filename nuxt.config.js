@@ -52,9 +52,9 @@ export default {
         endpoints: {
           login: { url: '/auth/login/', method: 'post', propertyName: 'token' },
           user: { url: '/auth/myinfo/', method: 'get', propertyName: 'user' }
-        }
+        },
         // tokenRequired: true,
-        // tokenType: 'bearer'
+        tokenType: 'jwt'
         // autoFetchUser: true
       }
     }

@@ -39,6 +39,7 @@ export default {
       valid: false,
       showPassword: false,
       userInfo: {
+        name: '',
         email: 'yuki.n3kobe@gmail.com',
         password: 'Popo0328'
       }
