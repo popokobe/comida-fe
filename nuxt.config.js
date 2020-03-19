@@ -42,9 +42,22 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/axios'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/auth'],
   axios: {
-    baseURL: 'http://127.0.0.1:8000/'
+    baseURL: 'http://127.0.0.1:8000'
+  },
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/auth/login/', method: 'post', propertyName: 'token' },
+          user: { url: '/auth/myinfo/', method: 'get', propertyName: 'user' }
+        }
+        // tokenRequired: true,
+        // tokenType: 'bearer'
+        // autoFetchUser: true
+      }
+    }
   },
   /*
    ** vuetify module configuration
@@ -53,7 +66,7 @@ export default {
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      dark: false,
       themes: {
         dark: {
           primary: colors.blue.darken2,
