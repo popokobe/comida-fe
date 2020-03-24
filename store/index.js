@@ -1,5 +1,5 @@
 export const state = () => ({
-  drawer: false
+  drawer: true
 })
 
 export const mutations = {
