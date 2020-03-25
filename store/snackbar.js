@@ -15,6 +15,7 @@ export const actions = {
   create({ commit }, snackbar) {
     snackbar.showing = true
     snackbar.color = snackbar.color || 'success'
+    snackbar.timeout = snackbar.timeout || 2000
     commit('ADD', snackbar)
   },
 
