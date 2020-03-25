@@ -18,21 +18,31 @@
       class="hidden-sm-and-down"
     />
     <v-spacer />
-    <v-btn href="/login" text>
+    <v-btn v-if="!$auth.loggedIn" href="/login" text>
       <v-icon>mdi-account</v-icon>
       ログイン
     </v-btn>
-    <v-btn href="/register" text>
+    <v-btn v-if="!$auth.loggedIn" href="/register" text>
       <v-icon>mdi-account-circle</v-icon>
       登録
     </v-btn>
-    <v-btn href="/myaccount" text>
+    <v-btn v-if="$auth.loggedIn" href="/myaccount" text>
       <v-icon>mdi-account</v-icon>
       マイページ
+    </v-btn>
+    <v-btn v-if="$auth.loggedIn" href="/" text @click="logout">
+      <v-icon>mdi-account</v-icon>
+      ログアウト
     </v-btn>
   </v-app-bar>
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {
+    logout() {
+      this.$auth.logout()
+    }
+  }
+}
 </script>

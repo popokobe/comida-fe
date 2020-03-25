@@ -44,8 +44,8 @@ export default {
       showPassword: false,
       userInfo: {
         username: '',
-        email: '',
-        password: ''
+        email: 'yuki.n3kobe@gmail.com',
+        password: 'Popo0328'
       }
     }
   }

@@ -47,17 +47,23 @@ export default {
     baseURL: 'http://127.0.0.1:8000'
   },
   auth: {
+    redirect: {
+      login: '/login/', // 未ログイン時に認証ルートへアクセスした際のリダイレクトURL
+      logout: '/login/', // ログアウト時のリダイレクトURL
+      home: '/' // ログイン後のリダイレクトURL
+    },
     strategies: {
       local: {
         endpoints: {
           login: { url: '/auth/login/', method: 'post', propertyName: 'token' },
-          user: { url: '/auth/myinfo/', method: 'get', propertyName: 'user' }
+          user: { url: '/auth/myinfo/', method: 'get', propertyName: false }
         },
-        // tokenRequired: true,
         tokenType: 'jwt'
-        // autoFetchUser: true
       }
     }
+  },
+  router: {
+    middleware: ['auth']
   },
   /*
    ** vuetify module configuration

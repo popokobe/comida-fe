@@ -12,6 +12,7 @@
 import UserAuthForm from '@/components/UserAuthForm'
 
 export default {
+  auth: false,
   components: {
     UserAuthForm
   },

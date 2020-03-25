@@ -18,6 +18,9 @@ export default {
       posts[`post${i}`] = res[i]
     }
     store.dispatch('setPosts', posts)
+  },
+  mounted() {
+    console.log(this.$store.state.auth)
   }
 }
 </script>
