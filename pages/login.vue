@@ -12,10 +12,21 @@ export default {
     UserAuthForm
   },
   methods: {
-    login(loginInfo) {
-      this.$auth.loginWith('local', {
-        data: loginInfo
-      })
+    async login(loginInfo) {
+      try {
+        await this.$auth.loginWith('local', {
+          data: loginInfo
+        })
+        this.$store.dispatch('snackbar/create', {
+          text: 'ログインしました'
+        })
+        this.$router.push('/')
+      } catch (error) {
+        this.$store.dispatch('snackbar/create', {
+          text: 'ログインできませんでした',
+          color: 'red'
+        })
+      }
     }
   }
 }
