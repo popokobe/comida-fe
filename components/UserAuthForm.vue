@@ -1,7 +1,11 @@
 <template>
   <v-form v-model="valid">
     <div @keydown.enter="submitForm(userInfo)">
-      <v-text-field v-if="hasName" v-model="userInfo.name" label="Username" />
+      <v-text-field
+        v-if="hasName"
+        v-model="userInfo.username"
+        label="Username"
+      />
 
       <v-text-field v-model="userInfo.email" label="Email" />
 
@@ -39,9 +43,9 @@ export default {
       valid: false,
       showPassword: false,
       userInfo: {
-        name: '',
-        email: 'yuki.n3kobe@gmail.com',
-        password: 'Popo0328'
+        username: '',
+        email: '',
+        password: ''
       }
     }
   }

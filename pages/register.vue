@@ -16,8 +16,23 @@ export default {
     UserAuthForm
   },
   methods: {
-    register() {
-      alert('You pressed a button')
+    async register(registrationInfo) {
+      try {
+        await this.$axios.post('auth/register/', registrationInfo)
+
+        await this.$auth.loginWith('local', {
+          data: registrationInfo
+        })
+        this.$store.dispatch('snackbar/create', {
+          text: '登録ありがとうございます'
+        })
+        this.$router.push('/')
+      } catch (error) {
+        this.$store.dispatch('snackbar/create', {
+          text: '登録内容に不備があります。もう一度お試しください。',
+          color: 'red'
+        })
+      }
     }
   }
 }
