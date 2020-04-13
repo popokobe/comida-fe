@@ -16,6 +16,15 @@
               </v-sheet>
             </v-carousel-item>
           </v-carousel>
+          <v-carousel
+            height="250"
+            hide-delimiter-background
+            show-arrows-on-hover
+          >
+            <v-carousel-item>
+              <img :src="`${post.img}`" />
+            </v-carousel-item>
+          </v-carousel>
         </v-col>
         <v-col cols="12">
           <div class="post-content">
