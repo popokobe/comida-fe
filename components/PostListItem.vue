@@ -22,7 +22,8 @@
             <p class="post-category">{{ post.category }}</p>
             <h2 class="post-name">{{ post.name }}</h2>
             <v-rating readonly :value="post.rating"></v-rating>
-            <p class="post-area">{{ post.name }}</p>
+            <p class="post-area">{{ post.area }}</p>
+            <p class="post-area">{{ post.dish }}</p>
             <p class="post-note">{{ post.note }}</p>
             <p class="post-expense">{{ post.expense }}</p>
           </div>

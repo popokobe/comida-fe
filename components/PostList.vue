@@ -4,6 +4,7 @@
       <v-col
         v-for="(item, index) in items"
         :key="index"
+        class="mx-2"
         cols="12"
         sm="6"
         md="4"

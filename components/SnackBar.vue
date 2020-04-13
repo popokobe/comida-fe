@@ -12,7 +12,7 @@
       {{ snackbar.text }}
 
       <v-btn text @click="removeSnackbar(snackbar)">
-        Close
+        閉じる
       </v-btn>
     </v-snackbar>
   </div>

@@ -10,6 +10,7 @@
       <v-btn href="/" text>comida</v-btn>
     </v-toolbar-title>
     <v-text-field
+      v-if="$auth.loggedIn"
       flat
       solo-inverted
       hide-details
@@ -31,7 +32,7 @@
       マイページ
     </v-btn>
     <v-btn v-if="$auth.loggedIn" href="/" text @click="logout">
-      <v-icon>mdi-account</v-icon>
+      <v-icon>mdi-logout</v-icon>
       ログアウト
     </v-btn>
   </v-app-bar>

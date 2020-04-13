@@ -1,10 +1,6 @@
 <template>
   <v-container>
-    <UserAuthForm
-      button-text="Register"
-      :submit-form="register"
-      has-name="true"
-    />
+    <UserAuthForm button-text="登録" :submit-form="register" has-name="true" />
   </v-container>
 </template>
 

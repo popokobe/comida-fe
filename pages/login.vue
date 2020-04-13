@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <UserAuthForm button-text="Login" :submit-form="login" />
+    <UserAuthForm button-text="ログイン" :submit-form="login" />
   </v-container>
 </template>
 

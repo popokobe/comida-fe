@@ -1,13 +1,18 @@
 <template>
-  <PostList :items="$store.state.posts" />
+  <div>
+    <PostList :items="$store.state.posts" />
+    <PostRegisterForm />
+  </div>
 </template>
 
 <script>
 import PostList from '@/components/PostList'
+import PostRegisterForm from '@/components/PostRegisterForm'
 
 export default {
   components: {
-    PostList
+    PostList,
+    PostRegisterForm
   },
   async asyncData({ $axios, store }) {
     const endpoint = 'api/v0/posts'
@@ -18,9 +23,6 @@ export default {
       posts[`post${i}`] = res[i]
     }
     store.dispatch('setPosts', posts)
-  },
-  mounted() {
-    console.log(this.$store.state.auth)
   }
 }
 </script>
