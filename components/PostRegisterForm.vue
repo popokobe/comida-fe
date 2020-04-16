@@ -15,10 +15,12 @@
             <v-row>
               <v-col cols="12">
                 <v-file-input
+                  ref="file"
                   label="写真を追加"
                   accept="image/*"
                   filled
                   prepend-icon="mdi-camera"
+                  @change="handleFileUpload"
                 ></v-file-input>
               </v-col>
               <v-col cols="12">
@@ -39,8 +41,8 @@
                   label="カテゴリ"
                 ></v-text-field>
               </v-col>
-              <v-col v-model="expense" cols="12" sm="4">
-                <v-text-field label="予算"></v-text-field>
+              <v-col cols="12" sm="4">
+                <v-text-field v-model="expense" label="予算"></v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-text-field v-model="dish" label="料理名"></v-text-field>
@@ -76,9 +78,12 @@
 </template>
 
 <script>
+const reader = new FileReader()
+
 export default {
-  async asyncData({ app }) {
-    const res = await app.$axios.$get('/api/v0/categories/')
+  async asyncData({ $axios }) {
+    const endpoint = '/api/v0/categories/'
+    const res = await $axios.$get(endpoint)
 
     return {
       categories: res.category
@@ -99,21 +104,30 @@ export default {
     }
   },
   methods: {
+    handleFileUpload(e) {
+      reader.readAsDataURL(e)
+      this.img = e
+    },
     async submitPost() {
-      await this.$axios
-        .$post('/api/v0/posts/', {
-          author_id: 1,
-          img: this.img,
-          name: this.name,
-          area: this.area,
-          category: this.category,
-          expense: this.expense,
-          dish: this.dish,
-          address: this.address,
-          rating: this.rating,
-          note: this.note
-        })
-        .then((this.dialog = false))
+      const params = new FormData()
+      params.append('author_id', 1)
+      params.append('img', this.img)
+      params.append('name', this.name)
+      params.append('area', this.area)
+      params.append('category', this.category)
+      params.append('expense', this.expense)
+      params.append('dish', this.dish)
+      params.append('address', this.address)
+      params.append('rating', this.rating)
+      params.append('note', this.note)
+
+      const endpoint = '/api/v0/posts/'
+      await this.$axios.$post(endpoint, params).then((res) => {
+        console.log(res)
+        const newPost = res
+        this.$store.dispatch('addPost', newPost)
+        this.dialog = false
+      })
     }
   }
 }

@@ -1,6 +1,13 @@
 export const state = () => ({
-  drawer: false
+  drawer: false,
+  posts: []
 })
+
+export const getters = {
+  getPosts(state) {
+    return state.posts
+  }
+}
 
 export const mutations = {
   showDrawer(state) {
@@ -8,6 +15,9 @@ export const mutations = {
   },
   setPosts(state, posts) {
     state.posts = posts
+  },
+  addPost(state, newPost) {
+    state.posts.push(newPost)
   }
 }
 
@@ -17,5 +27,8 @@ export const actions = {
   },
   setPosts(context, posts) {
     context.commit('setPosts', posts)
+  },
+  addPost(context, newPost) {
+    context.commit('addPost', newPost)
   }
 }

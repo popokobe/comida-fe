@@ -1,6 +1,6 @@
 <template>
   <div>
-    <PostList :items="$store.state.posts" />
+    <PostList :items="getPosts" />
     <PostRegisterForm />
   </div>
 </template>
@@ -16,13 +16,13 @@ export default {
   },
   async asyncData({ $axios, store }) {
     const endpoint = 'api/v0/posts'
-    const res = await $axios.$get(endpoint)
-
-    const posts = {}
-    for (let i = 0; i < res.length; i++) {
-      posts[`post${i}`] = res[i]
-    }
+    const posts = await $axios.$get(endpoint)
     store.dispatch('setPosts', posts)
+  },
+  computed: {
+    getPosts() {
+      return this.$store.getters.getPosts
+    }
   }
 }
 </script>
