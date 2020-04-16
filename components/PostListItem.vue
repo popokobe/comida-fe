@@ -3,7 +3,7 @@
     <v-container fluid>
       <v-row>
         <v-col cols="12">
-          <v-carousel
+          <!-- <v-carousel
             height="250"
             hide-delimiter-background
             show-arrows-on-hover
@@ -15,14 +15,14 @@
                 </v-row>
               </v-sheet>
             </v-carousel-item>
-          </v-carousel>
+          </v-carousel> -->
           <v-carousel
             height="250"
             hide-delimiter-background
             show-arrows-on-hover
           >
             <v-carousel-item>
-              <img :src="`${post.img}`" />
+              <v-img :src="`${post.img}`" aspect-ratio="1.2" />
             </v-carousel-item>
           </v-carousel>
         </v-col>

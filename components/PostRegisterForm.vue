@@ -14,6 +14,14 @@
           <v-container>
             <v-row>
               <v-col cols="12">
+                <v-file-input
+                  label="写真を追加"
+                  accept="image/*"
+                  filled
+                  prepend-icon="mdi-camera"
+                ></v-file-input>
+              </v-col>
+              <v-col cols="12">
                 <v-text-field v-model="name" label="お店の名前"></v-text-field>
               </v-col>
               <v-col cols="12" sm="4">
@@ -36,6 +44,10 @@
               </v-col>
               <v-col cols="12">
                 <v-text-field v-model="dish" label="料理名"></v-text-field>
+              </v-col>
+              <v-col cols="12">
+                <span>評価</span>
+                <v-rating v-model="rating" />
               </v-col>
               <v-col cols="12">
                 <v-text-field v-model="address" label="住所"></v-text-field>
@@ -65,14 +77,23 @@
 
 <script>
 export default {
+  async asyncData({ app }) {
+    const res = await app.$axios.$get('/api/v0/categories/')
+
+    return {
+      categories: res.category
+    }
+  },
   data() {
     return {
-      dialog: true,
+      dialog: false,
+      img: '',
       name: 'テスト',
       area: 'テスト',
       category: 'FA',
       expense: 1000,
       dish: 'テスト',
+      rating: 3,
       address: 'テスト',
       note: 'テスト'
     }
@@ -82,13 +103,14 @@ export default {
       await this.$axios
         .$post('/api/v0/posts/', {
           author_id: 1,
+          img: this.img,
           name: this.name,
           area: this.area,
           category: this.category,
           expense: this.expense,
           dish: this.dish,
           address: this.address,
-          rating: 5,
+          rating: this.rating,
           note: this.note
         })
         .then((this.dialog = false))
