@@ -16,7 +16,11 @@ export default {
   },
   async asyncData({ $axios, store }) {
     const endpoint = 'api/v0/posts'
-    const posts = await $axios.$get(endpoint)
+    const posts = await $axios.$get(endpoint, {
+      params: {
+        search: store.state.auth.user.id
+      }
+    })
     store.dispatch('setPosts', posts)
   },
   computed: {
