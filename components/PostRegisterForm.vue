@@ -110,7 +110,7 @@ export default {
     },
     async submitPost() {
       const params = new FormData()
-      params.append('author_id', 1)
+      params.append('author_id', this.$store.state.auth.user.id)
       params.append('img', this.img)
       params.append('name', this.name)
       params.append('area', this.area)
