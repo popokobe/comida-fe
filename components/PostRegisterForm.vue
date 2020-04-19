@@ -100,7 +100,7 @@ export default {
       reader.readAsDataURL(e)
       this.img = e
     },
-    async submitPost() {
+    submitPost() {
       const requestItem = new FormData()
       requestItem.append('author_id', this.$store.state.auth.user.id)
       requestItem.append('img', this.img)
@@ -113,13 +113,8 @@ export default {
       requestItem.append('rating', this.rating)
       requestItem.append('note', this.note)
 
-      const endpoint = '/api/v0/posts/'
-      await this.$axios.$post(endpoint, requestItem).then((res) => {
-        console.log(res)
-        const newPost = res
-        this.$store.dispatch('addPost', newPost)
-        this.dialog = false
-      })
+      this.$store.dispatch('post/addPost', requestItem)
+      this.dialog = false
     }
   }
 }

@@ -10,7 +10,7 @@
         md="4"
         lg="3"
       >
-        <PostListItem :post="post" />
+        <PostListItem :current-index="index" :post="post" />
       </v-col>
     </v-row>
   </v-container>
@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      posts: 'post/getEachPost'
+      posts: 'post/getPost'
     })
   }
 }
