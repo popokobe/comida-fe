@@ -1,6 +1,6 @@
 <template>
   <div>
-    <PostList :items="getPosts" />
+    <PostList />
     <PostRegisterForm />
   </div>
 </template>
@@ -14,19 +14,8 @@ export default {
     PostList,
     PostRegisterForm
   },
-  async asyncData({ $axios, store }) {
-    const endpoint = 'api/v0/posts'
-    const posts = await $axios.$get(endpoint, {
-      params: {
-        search: store.state.auth.user.id
-      }
-    })
-    store.dispatch('setPosts', posts)
-  },
-  computed: {
-    getPosts() {
-      return this.$store.getters.getPosts
-    }
+  async asyncData({ store }) {
+    await store.dispatch('post/setPost')
   }
 }
 </script>

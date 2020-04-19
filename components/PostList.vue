@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col
-        v-for="(item, index) in items"
+        v-for="(post, index) in posts"
         :key="index"
         class="mx-2"
         cols="12"
@@ -10,22 +10,24 @@
         md="4"
         lg="3"
       >
-        <PostListItem :post="item" />
+        <PostListItem :post="post" />
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 import PostListItem from '@/components/PostListItem'
 export default {
   components: {
     PostListItem
   },
-  props: {
-    items: {
-      type: Array
-    }
+  computed: {
+    ...mapGetters({
+      posts: 'post/getEachPost'
+    })
   }
 }
 </script>

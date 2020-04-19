@@ -35,6 +35,7 @@
             <p class="post-area">{{ post.dish }}</p>
             <p class="post-note">{{ post.note }}</p>
             <p class="post-expense">{{ post.expense }}</p>
+            <PostEditForm :edit-post="post" />
           </div>
         </v-col>
       </v-row>
@@ -43,7 +44,12 @@
 </template>
 
 <script>
+import PostEditForm from '@/components/PostEditForm'
+
 export default {
+  components: {
+    PostEditForm
+  },
   props: {
     post: {
       type: Object

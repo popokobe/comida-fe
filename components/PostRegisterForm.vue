@@ -81,14 +81,6 @@
 const reader = new FileReader()
 
 export default {
-  async asyncData({ $axios }) {
-    const endpoint = '/api/v0/categories/'
-    const res = await $axios.$get(endpoint)
-
-    return {
-      categories: res.category
-    }
-  },
   data() {
     return {
       dialog: false,
@@ -109,20 +101,20 @@ export default {
       this.img = e
     },
     async submitPost() {
-      const params = new FormData()
-      params.append('author_id', this.$store.state.auth.user.id)
-      params.append('img', this.img)
-      params.append('name', this.name)
-      params.append('area', this.area)
-      params.append('category', this.category)
-      params.append('expense', this.expense)
-      params.append('dish', this.dish)
-      params.append('address', this.address)
-      params.append('rating', this.rating)
-      params.append('note', this.note)
+      const requestItem = new FormData()
+      requestItem.append('author_id', this.$store.state.auth.user.id)
+      requestItem.append('img', this.img)
+      requestItem.append('name', this.name)
+      requestItem.append('area', this.area)
+      requestItem.append('category', this.category)
+      requestItem.append('expense', this.expense)
+      requestItem.append('dish', this.dish)
+      requestItem.append('address', this.address)
+      requestItem.append('rating', this.rating)
+      requestItem.append('note', this.note)
 
       const endpoint = '/api/v0/posts/'
-      await this.$axios.$post(endpoint, params).then((res) => {
+      await this.$axios.$post(endpoint, requestItem).then((res) => {
         console.log(res)
         const newPost = res
         this.$store.dispatch('addPost', newPost)
