@@ -70,7 +70,7 @@
           <v-btn color="blue darken-1" text @click="dialog = false"
             >閉じる</v-btn
           >
-          <v-btn color="blue darken-1" text @click="submitPost">保存</v-btn>
+          <v-btn color="blue darken-1" text @click="updatePost">保存</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -81,18 +81,112 @@
 const reader = new FileReader()
 
 export default {
+  props: {
+    currentIndex: {
+      type: Number
+    }
+  },
   data() {
     return {
-      dialog: false,
-      img: '',
-      name: '',
-      area: '',
-      category: '',
-      expense: null,
-      dish: '',
-      rating: null,
-      address: '',
-      note: ''
+      dialog: false
+    }
+  },
+  computed: {
+    name: {
+      get() {
+        return this.$store.state.post.post[this.currentIndex].name
+      },
+      set(value) {
+        this.$store.commit('post/updatePost', {
+          currentIndex: this.currentIndex,
+          key: 'name',
+          value
+        })
+      }
+    },
+    area: {
+      get() {
+        return this.$store.state.post.post[this.currentIndex].area
+      },
+      set(value) {
+        this.$store.commit('post/updatePost', {
+          currentIndex: this.currentIndex,
+          key: 'area',
+          value
+        })
+      }
+    },
+    category: {
+      get() {
+        return this.$store.state.post.post[this.currentIndex].category
+      },
+      set(value) {
+        this.$store.commit('post/updatePost', {
+          currentIndex: this.currentIndex,
+          key: 'category',
+          value
+        })
+      }
+    },
+    expense: {
+      get() {
+        return this.$store.state.post.post[this.currentIndex].expense
+      },
+      set(value) {
+        this.$store.commit('post/updatePost', {
+          currentIndex: this.currentIndex,
+          key: 'expense',
+          value
+        })
+      }
+    },
+    dish: {
+      get() {
+        return this.$store.state.post.post[this.currentIndex].dish
+      },
+      set(value) {
+        this.$store.commit('post/updatePost', {
+          currentIndex: this.currentIndex,
+          key: 'dish',
+          value
+        })
+      }
+    },
+    rating: {
+      get() {
+        return this.$store.state.post.post[this.currentIndex].rating
+      },
+      set(value) {
+        this.$store.commit('post/updatePost', {
+          currentIndex: this.currentIndex,
+          key: 'rating',
+          value
+        })
+      }
+    },
+    address: {
+      get() {
+        return this.$store.state.post.post[this.currentIndex].address
+      },
+      set(value) {
+        this.$store.commit('post/updatePost', {
+          currentIndex: this.currentIndex,
+          key: 'address',
+          value
+        })
+      }
+    },
+    note: {
+      get() {
+        return this.$store.state.post.post[this.currentIndex].note
+      },
+      set(value) {
+        this.$store.commit('post/updatePost', {
+          currentIndex: this.currentIndex,
+          key: 'note',
+          value
+        })
+      }
     }
   },
   methods: {
@@ -100,26 +194,8 @@ export default {
       reader.readAsDataURL(e)
       this.img = e
     },
-    async submitPost() {
-      const requestItem = new FormData()
-      requestItem.append('author_id', this.$store.state.auth.user.id)
-      requestItem.append('img', this.img)
-      requestItem.append('name', this.name)
-      requestItem.append('area', this.area)
-      requestItem.append('category', this.category)
-      requestItem.append('expense', this.expense)
-      requestItem.append('dish', this.dish)
-      requestItem.append('address', this.address)
-      requestItem.append('rating', this.rating)
-      requestItem.append('note', this.note)
-
-      const endpoint = '/api/v0/posts/'
-      await this.$axios.$post(endpoint, requestItem).then((res) => {
-        console.log(res)
-        const newPost = res
-        this.$store.dispatch('addPost', newPost)
-        this.dialog = false
-      })
+    updatePost() {
+      alert('hello')
     }
   }
 }
