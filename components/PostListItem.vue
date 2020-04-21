@@ -22,27 +22,25 @@
             show-arrows-on-hover
           >
             <v-carousel-item>
-              <v-img :src="`${post.img}`" aspect-ratio="1.2" />
+              <v-img :src="`${post.img}`" aspect-ratio="1" contain />
             </v-carousel-item>
           </v-carousel>
         </v-col>
         <v-col cols="12">
           <div class="post-content">
             <p class="post-category">{{ post.category }}</p>
-            <h2 class="post-name" @click="changePostStatus">
-              {{ post.name }}
-            </h2>
+            <h2 class="post-name">{{ post.name }}</h2>
             <v-text-field
               v-show="post.editable"
-              v-model="name"
+              v-model="post.name"
               label="お店の名前"
-              @keyup.enter="changePostStatus"
             ></v-text-field>
             <v-rating readonly :value="post.rating"></v-rating>
             <p class="post-area">{{ post.area }}</p>
             <p class="post-area">{{ post.dish }}</p>
             <p class="post-note">{{ post.note }}</p>
             <p class="post-expense">{{ post.expense }}</p>
+            <PostEditForm :current-index="currentIndex" :edit-post="post" />
           </div>
         </v-col>
       </v-row>
@@ -51,8 +49,12 @@
 </template>
 
 <script>
+import PostEditForm from '@/components/PostEditForm'
+
 export default {
-  components: {},
+  components: {
+    PostEditForm
+  },
   props: {
     post: {
       type: Object
@@ -71,25 +73,6 @@ export default {
         'deep-purple accent-4'
       ],
       slides: ['First', 'Second', 'Third', 'Fourth', 'Fifth']
-    }
-  },
-  computed: {
-    name: {
-      get() {
-        return this.$store.state.post.post[this.currentIndex].name
-      },
-      set(value) {
-        this.$store.commit('post/updatePost', {
-          currentIndex: this.currentIndex,
-          key: 'name',
-          value
-        })
-      }
-    }
-  },
-  methods: {
-    changePostStatus() {
-      this.$store.commit('post/changePostStatus', this.currentIndex)
     }
   }
 }

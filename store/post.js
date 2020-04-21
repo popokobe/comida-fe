@@ -21,19 +21,15 @@ export const mutations = {
   updatePost(state, { currentIndex, key, value }) {
     state.post[currentIndex][key] = value
   },
-  changePostStatus(state, currentIndex) {
-    state.post[currentIndex].editable = !state.post[currentIndex].editable
+  deletePost(state, payload) {
+    state.post.splice(payload, 1)
   }
 }
 
 export const actions = {
   async setPost(context, state) {
     const endpoint = 'api/v0/posts'
-    const post = await this.$axios.$get(endpoint, {
-      params: {
-        search: this.$auth.user.id
-      }
-    })
+    const post = await this.$axios.$get(endpoint)
     context.commit('setPost', post)
   },
   async addPost(context, payload) {
@@ -41,6 +37,14 @@ export const actions = {
     await this.$axios.$post(endpoint, payload).then((res) => {
       const newPost = res
       context.commit('addPost', newPost)
+    })
+  },
+  async updatePost(context, { currentIndex, currentPostId, requestItem }) {
+    const endpoint = 'api/v0/posts/' + currentPostId + '/'
+    await this.$axios.$put(endpoint, requestItem).then((res) => {
+      const updatedPost = res
+      context.commit('deletePost', currentIndex)
+      context.commit('addPost', updatedPost)
     })
   }
 }

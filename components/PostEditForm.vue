@@ -1,8 +1,8 @@
 <template>
-  <v-row justify="center">
+  <v-row justify="end">
     <v-dialog v-model="dialog" persistent max-width="600px">
       <template v-slot:activator="{ on }">
-        <v-btn color="indigo" fab dark v-on="on"
+        <v-btn color="indigo" small fab dark v-on="on"
           ><v-icon dark>mdi-pencil</v-icon>
         </v-btn>
       </template>
@@ -16,7 +16,7 @@
               <v-col cols="12">
                 <v-file-input
                   ref="file"
-                  label="写真を追加"
+                  label="写真を変更"
                   accept="image/*"
                   filled
                   prepend-icon="mdi-camera"
@@ -88,7 +88,8 @@ export default {
   },
   data() {
     return {
-      dialog: false
+      dialog: false,
+      img: null
     }
   },
   computed: {
@@ -195,7 +196,48 @@ export default {
       this.img = e
     },
     updatePost() {
-      alert('hello')
+      const requestItem = new FormData()
+      requestItem.append('author', this.$store.state.auth.user.id)
+      requestItem.append('img', this.img)
+      requestItem.append(
+        'name',
+        this.$store.state.post.post[this.currentIndex].name
+      )
+      requestItem.append(
+        'area',
+        this.$store.state.post.post[this.currentIndex].area
+      )
+      requestItem.append(
+        'category',
+        this.$store.state.post.post[this.currentIndex].category
+      )
+      requestItem.append(
+        'expense',
+        this.$store.state.post.post[this.currentIndex].expense
+      )
+      requestItem.append(
+        'dish',
+        this.$store.state.post.post[this.currentIndex].dish
+      )
+      requestItem.append(
+        'address',
+        this.$store.state.post.post[this.currentIndex].address
+      )
+      requestItem.append(
+        'rating',
+        this.$store.state.post.post[this.currentIndex].rating
+      )
+      requestItem.append(
+        'note',
+        this.$store.state.post.post[this.currentIndex].note
+      )
+
+      this.$store.dispatch('post/updatePost', {
+        currentIndex: this.currentIndex,
+        currentPostId: this.$store.state.post.post[this.currentIndex].id,
+        requestItem
+      })
+      this.dialog = false
     }
   }
 }
