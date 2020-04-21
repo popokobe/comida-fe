@@ -41,8 +41,8 @@
 <script>
 export default {
   methods: {
-    async logout() {
-      await this.$auth.logout()
+    logout() {
+      this.$auth.logout()
     }
   }
 }
