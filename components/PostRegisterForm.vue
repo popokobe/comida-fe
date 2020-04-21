@@ -102,7 +102,7 @@ export default {
     },
     submitPost() {
       const requestItem = new FormData()
-      requestItem.append('author_id', this.$store.state.auth.user.id)
+      requestItem.append('author', this.$store.state.auth.user.id)
       requestItem.append('img', this.img)
       requestItem.append('name', this.name)
       requestItem.append('area', this.area)

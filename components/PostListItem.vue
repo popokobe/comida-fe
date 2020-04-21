@@ -40,6 +40,7 @@
             <p class="post-area">{{ post.dish }}</p>
             <p class="post-note">{{ post.note }}</p>
             <p class="post-expense">{{ post.expense }}</p>
+            <PostDeleteForm :current-index="currentIndex" />
             <PostEditForm :current-index="currentIndex" :edit-post="post" />
           </div>
         </v-col>
@@ -49,10 +50,12 @@
 </template>
 
 <script>
+import PostDeleteForm from '@/components/PostDeleteForm'
 import PostEditForm from '@/components/PostEditForm'
 
 export default {
   components: {
+    PostDeleteForm,
     PostEditForm
   },
   props: {

@@ -46,5 +46,11 @@ export const actions = {
       context.commit('deletePost', currentIndex)
       context.commit('addPost', updatedPost)
     })
+  },
+  async deletePost(context, { currentIndex, currentPostId }) {
+    const endpoint = 'api/v0/posts/' + currentPostId + '/'
+    await this.$axios.$delete(endpoint).then((res) => {
+      context.commit('deletePost', currentIndex)
+    })
   }
 }

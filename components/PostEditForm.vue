@@ -1,10 +1,8 @@
 <template>
-  <v-row justify="end">
+  <v-row justify="center">
     <v-dialog v-model="dialog" persistent max-width="600px">
       <template v-slot:activator="{ on }">
-        <v-btn color="indigo" small fab dark v-on="on"
-          ><v-icon dark>mdi-pencil</v-icon>
-        </v-btn>
+        <v-btn color="primary" small dark v-on="on">編集</v-btn>
       </template>
       <v-card>
         <v-card-title>
