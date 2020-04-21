@@ -1,15 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col
-        v-for="(post, index) in posts"
-        :key="index"
-        class="mx-2"
-        cols="12"
-        sm="6"
-        md="4"
-        lg="3"
-      >
+      <v-col v-for="(post, index) in posts" :key="index">
         <PostListItem :current-index="index" :post="post" />
       </v-col>
     </v-row>

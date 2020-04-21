@@ -1,5 +1,5 @@
 <template>
-  <v-card min-width="300" tile>
+  <v-card shaped outlined>
     <v-container fluid>
       <v-row>
         <v-col cols="12">
