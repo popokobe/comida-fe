@@ -10,8 +10,4 @@ export const mutations = {
   }
 }
 
-export const actions = {
-  showDrawer(context) {
-    context.commit('showDrawer')
-  }
-}
+export const actions = {}
